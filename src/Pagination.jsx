@@ -39,11 +39,13 @@ class Pagination extends React.Component {
     console.log('I18n._localeKey', I18n._localeKey);
     let locale = I18n._localeKey || this.props.locale || DEFAULT_LOCALE;
     locale = locale.toLowerCase();
+    let path = `${LOCALE_PATH}/${locale}`;
+    let defaultPath = `${LOCALE_PATH}/${DEFAULT_LOCALE}`;
 
     try {
-        this._localeObj = require(`${LOCALE_PATH}/${locale}`);
+        this._localeObj = require(path);
     } catch(err) {
-        this._localeObj = require(`${LOCALE_PATH}/${DEFAULT_LOCALE}`);
+        this._localeObj = require(defaultPath);
     }
 
     [
