@@ -7,7 +7,6 @@ const KEYCODE = require('./KeyCode');
 function noop() {
 }
 
-const LOCALE_PATH = 'locale';
 const DEFAULT_LOCALE = 'en-us';
 
 class Pagination extends React.Component {
@@ -38,13 +37,11 @@ class Pagination extends React.Component {
 
     let locale = I18n._localeKey || this.props.locale || DEFAULT_LOCALE;
     locale = locale.toLowerCase();
-    var path = './' + LOCALE_PATH + '/' + locale;
-    var defaultPath = './' + LOCALE_PATH + '/' + DEFAULT_LOCALE;
 
     try {
-        this._localeObj = require('./locale/vn-vn');
+        this._localeObj = require('./locale/' + locale);
     } catch(err) {
-        this._localeObj = require(defaultPath);
+        this._localeObj = require('./locale/' + DEFAULT_LOCALE);
     }
 
     [
