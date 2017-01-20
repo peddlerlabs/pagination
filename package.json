@@ -40,6 +40,12 @@
     "coverage": "rc-tools run coverage",
     "watch": "rc-tools run watch"
   },
+  "dependencies": {
+      "react-dom": "^15.2.1",
+      "react-fluxible-i18n": "1.1.0",
+      "file-system": "^2.2.2",
+      "react": "^15.2.1"
+  },
   "devDependencies": {
     "expect.js": "0.3.x",
     "pre-commit": "1.x",
