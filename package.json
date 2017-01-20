@@ -43,7 +43,7 @@
   "dependencies": {
       "react-dom": "^15.2.1",
       "react-fluxible-i18n": "1.1.0",
-      "file-system": "^2.2.2",
+      "fs-extra": "^2.0.0",
       "react": "^15.2.1"
   },
   "devDependencies": {
@@ -55,7 +55,7 @@
     "react-addons-test-utils": "^15.3.1",
     "react-dom": "^15.2.1",
     "react-fluxible-i18n": "1.1.0",
-    "file-system": "^2.2.2"
+    "fs-extra": "^2.0.0"
   },
   "pre-commit": [
     "lint"

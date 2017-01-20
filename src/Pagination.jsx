@@ -1,6 +1,6 @@
 const React = require('react');
 const I18n = require('react-fluxible-i18n').I18n;
-const file = require('file-system');
+const fse = require('fs-extra');
 const Pager = require('./Pager');
 const Options = require('./Options');
 const KEYCODE = require('./KeyCode');
@@ -40,7 +40,7 @@ class Pagination extends React.Component {
     console.log('I18n._localKey', I18n._localKey);
     let locale = I18n._localKey || this.props.locale || DEFAULT_LOCALE;
     locale = locale.toLowerCase();
-    let supportedLocales = file.readdirSync(LOCALE_PATH);
+    let supportedLocales = fse.readdirSync(LOCALE_PATH);
 
     for(let sl of supportedLocales) {
         console.log('sl', sl);
