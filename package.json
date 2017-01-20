@@ -11,8 +11,8 @@
   "homepage": "http://github.com/react-component/pagination",
   "author": "i@xiaoba.me",
   "repository": {
-    "type": "url",
-    "url": "https://github.com/KhoaNguy3n/pagination.git"
+    "type": "git",
+    "url": "git+https://github.com/KhoaNguy3n/pagination.git"
   },
   "bugs": {
     "url": "http://github.com/react-component/pagination/issues"
