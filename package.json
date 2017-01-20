@@ -48,7 +48,8 @@
     "react": "^15.2.1",
     "react-addons-test-utils": "^15.3.1",
     "react-dom": "^15.2.1",
-    "react-fluxible-i18n": "1.1.0"
+    "react-fluxible-i18n": "1.1.0",
+    "file-system": "^2.2.2"
   },
   "pre-commit": [
     "lint"

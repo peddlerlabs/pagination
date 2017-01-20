@@ -1,6 +1,6 @@
 const React = require('react');
 const I18n = require('react-fluxible-i18n').I18n;
-const fs = require('fs');
+const fs = require('file-system');
 const Pager = require('./Pager');
 const Options = require('./Options');
 const KEYCODE = require('./KeyCode');
