@@ -36,8 +36,8 @@ class Pagination extends React.Component {
       pageSize,
     };
 
-    console.log('I18n._localKey', I18n._localKey);
-    let locale = I18n._localKey || this.props.locale || DEFAULT_LOCALE;
+    console.log('I18n._localeKey', I18n._localeKey);
+    let locale = I18n._localeKey || this.props.locale || DEFAULT_LOCALE;
     locale = locale.toLowerCase();
 
     try {
@@ -250,7 +250,7 @@ class Pagination extends React.Component {
         const active = this.state.current === i;
         pagerList.push(
           <Pager
-            locale={locale}
+            locale={this._localeObj}
             rootPrefixCls={prefixCls}
             onClick={this._handleChange.bind(this, i)}
             key={i}
@@ -282,7 +282,7 @@ class Pagination extends React.Component {
       );
       lastPager = (
         <Pager
-          locale={props.locale}
+          locale={this._localeObj}
           last
           rootPrefixCls={prefixCls}
           onClick={this._handleChange.bind(this, allPages)}
@@ -293,7 +293,7 @@ class Pagination extends React.Component {
       );
       firstPager = (
         <Pager
-          locale={props.locale}
+          locale={this._localeObj}
           rootPrefixCls={prefixCls}
           onClick={this._handleChange.bind(this, 1)}
           key={1}
@@ -317,7 +317,7 @@ class Pagination extends React.Component {
         const active = current === i;
         pagerList.push(
           <Pager
-            locale={props.locale}
+            locale={this._localeObj}
             rootPrefixCls={prefixCls}
             onClick={this._handleChange.bind(this, i)}
             key={i}
@@ -387,7 +387,7 @@ class Pagination extends React.Component {
           <a />
         </li>
         <Options
-          locale={props.locale}
+          locale={this._localeObj}
           rootPrefixCls={prefixCls}
           selectComponentClass={props.selectComponentClass}
           selectPrefixCls={props.selectPrefixCls}
