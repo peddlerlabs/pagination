@@ -46,7 +46,8 @@
     "rc-tools": "5.x",
     "react": "^15.2.1",
     "react-addons-test-utils": "^15.3.1",
-    "react-dom": "^15.2.1"
+    "react-dom": "^15.2.1",
+    "react-fluxible-i18n": "1.1.0"
   },
   "pre-commit": [
     "lint"

@@ -1,11 +1,15 @@
 const React = require('react');
+const I18n = require('react-fluxible-i18n').I18n;
+const fs = require('fs');
 const Pager = require('./Pager');
 const Options = require('./Options');
 const KEYCODE = require('./KeyCode');
-const LOCALE = require('./locale/zh_CN');
 
 function noop() {
 }
+
+const LOCALE_PATH = './locale';
+const DEFAULT_LOCALE = 'en-us';
 
 class Pagination extends React.Component {
   constructor(props) {
@@ -32,6 +36,22 @@ class Pagination extends React.Component {
       _current: current,
       pageSize,
     };
+
+    console.log('I18n._localKey', I18n._localKey);
+    let locale = I18n._localKey || this.props.locale || DEFAULT_LOCALE;
+    locale = locale.toLowerCase();
+    let supportedLocales = fs.readdirSync(LOCALE_PATH);
+
+    for(let sl of supportedLocales) {
+        console.log('sl', sl);
+        sl = sl.toLowerCase();
+        if(sl.indexOf(locale) > -1) {
+            locale = sl;
+            break;
+        }
+    }
+
+    this._localeObj = require(`${LOCALE_PATH}/${locale}`);
 
     [
       'render',
@@ -188,7 +208,7 @@ class Pagination extends React.Component {
 
   render() {
     const props = this.props;
-    const locale = props.locale;
+    const locale = this._localeObj;
 
     const prefixCls = props.prefixCls;
     const allPages = this._calcPage();
@@ -403,7 +423,7 @@ Pagination.propTypes = {
   showQuickJumper: React.PropTypes.bool,
   pageSizeOptions: React.PropTypes.arrayOf(React.PropTypes.string),
   showTotal: React.PropTypes.func,
-  locale: React.PropTypes.object,
+  locale: React.PropTypes.string,
   style: React.PropTypes.object,
 };
 
@@ -419,7 +439,7 @@ Pagination.defaultProps = {
   showQuickJumper: false,
   showSizeChanger: false,
   onShowSizeChange: noop,
-  locale: LOCALE,
+  locale: DEFAULT_LOCALE,
   style: {},
 };
 
