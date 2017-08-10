@@ -8,6 +8,7 @@ function noop() {
 }
 
 const DEFAULT_LOCALE = 'en-us';
+const MAX_TOTAL = 100;
 
 class Pagination extends React.Component {
   constructor(props) {
@@ -89,7 +90,13 @@ class Pagination extends React.Component {
     if (typeof pageSize === 'undefined') {
       pageSize = this.state.pageSize;
     }
-    return Math.floor((this.props.total - 1) / pageSize) + 1;
+    let result = Math.floor((this.props.total - 1) / pageSize) + 1;
+
+    if(this.props.shouldLimitTotal && result > 100) {
+        return MAX_TOTAL;
+    }
+
+    return result;
   }
 
   _isValid(page) {
@@ -416,6 +423,7 @@ Pagination.propTypes = {
   showTotal: React.PropTypes.func,
   locale: React.PropTypes.string,
   style: React.PropTypes.object,
+  shouldLimitTotal: React.PropTypes.bool
 };
 
 Pagination.defaultProps = {
@@ -432,6 +440,7 @@ Pagination.defaultProps = {
   onShowSizeChange: noop,
   locale: DEFAULT_LOCALE,
   style: {},
+  shouldLimitTotal: false
 };
 
 module.exports = Pagination;
