@@ -204,6 +204,26 @@ class Pagination extends React.Component {
     return this.state.current < this._calcPage();
   }
 
+  _fallbackUrl(p) {
+      if (p === 'next') {
+          if(this._hasNext()) {
+              p = this.state.current + 1;
+          } else {
+              p = null;
+          }
+      } else if (p === 'prev') {
+          if(this._hasPrev()) {
+              p = this.state.current - 1;
+          } else {
+              p = null;
+          }
+      }
+      if (p && this.props.fallbackUrl) {
+          return this.props.fallbackUrl(p);
+      }
+      return '#' + p;
+  }
+
   render() {
     const props = this.props;
     const locale = this._localeObj;
@@ -261,6 +281,7 @@ class Pagination extends React.Component {
             key={i}
             page={i}
             active={active}
+            fallbackUrl={this._fallbackUrl(i)}
           />
         );
       }
@@ -294,6 +315,7 @@ class Pagination extends React.Component {
           key={allPages}
           page={allPages}
           active={false}
+          fallbackUrl={this._fallbackUrl(allPages)}
         />
       );
       firstPager = (
@@ -304,6 +326,7 @@ class Pagination extends React.Component {
           key={1}
           page={1}
           active={false}
+          fallbackUrl={this._fallbackUrl(1)}
         />
       );
 
@@ -328,6 +351,7 @@ class Pagination extends React.Component {
             key={i}
             page={i}
             active={active}
+            fallbackUrl={this._fallbackUrl(i)}
           />
         );
       }
@@ -381,7 +405,7 @@ class Pagination extends React.Component {
           onClick={this._prev}
           className={`${this._hasPrev() ? '' : `${prefixCls}-disabled`} ${prefixCls}-prev`}
         >
-          <a />
+          <a onClick={function(evt){ evt.preventDefault(); }} href={this._fallbackUrl('prev')} />
         </li>
         {pagerList}
         <li
@@ -389,7 +413,7 @@ class Pagination extends React.Component {
           onClick={this._next}
           className={`${this._hasNext() ? '' : `${prefixCls}-disabled`} ${prefixCls}-next`}
         >
-          <a />
+          <a onClick={function(evt){ evt.preventDefault(); }} href={this._fallbackUrl('next')} />
         </li>
         <Options
           locale={this._localeObj}
@@ -417,6 +441,7 @@ Pagination.propTypes = {
   onChange: React.PropTypes.func,
   showSizeChanger: React.PropTypes.bool,
   onShowSizeChange: React.PropTypes.func,
+  fallbackUrl: React.PropTypes.func,
   selectComponentClass: React.PropTypes.func,
   showQuickJumper: React.PropTypes.bool,
   pageSizeOptions: React.PropTypes.arrayOf(React.PropTypes.string),

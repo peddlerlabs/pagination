@@ -21,6 +21,9 @@ function abbreviateNumber(value) {
 };
 
 class Pager extends React.Component {
+  onClickHref(evt) {
+      evt.preventDefault();
+  }
   render() {
     const props = this.props;
     const prefixCls = `${props.rootPrefixCls}-item`;
@@ -36,7 +39,7 @@ class Pager extends React.Component {
 
     return (
       <li title={props.page} className={cls} onClick={props.onClick}>
-        <a>{abbreviateNumber(props.page)}</a>
+        <a href={props.fallbackUrl} onClick={this.onClickHref}>{abbreviateNumber(props.page)}</a>
       </li>
     );
   }
@@ -48,6 +51,7 @@ Pager.propTypes = {
   last: React.PropTypes.bool,
   locale: React.PropTypes.object,
   className: React.PropTypes.string,
+  fallbackUrl: React.PropTypes.string
 };
 
 module.exports = Pager;
